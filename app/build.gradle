@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
+
+    defaultConfig {
+        applicationId "com.zhongjh.albumcamerasystem"
+        minSdkVersion 19
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // 注解权限库,注意，这个需要放在app module才可以生成正确 https://github.com/permissions-dispatcher/PermissionsDispatcher
+    implementation "org.permissionsdispatcher:permissionsdispatcher:4.7.0"
+    annotationProcessor "org.permissionsdispatcher:permissionsdispatcher-processor:4.7.0"
+
+    // 鲁班压缩图片
+    implementation 'top.zibin:Luban:1.1.8'
+
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+
+    //******************************* 框架库 ****************************************//
+//    api "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjava2Version" // RxBinding包中包含RxJava的内容，所以就无需再添加RxJava的依赖了。
+    api 'com.jakewharton.rxbinding3:rxbinding:3.1.0'
+    //RxJava2 Adapter 大神写的一个让rxjava2兼容retrofit2
+    api 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    //RxJava2 Adapter
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    //retrofit2核心包
+    api "com.squareup.retrofit2:retrofit:2.1.0"
+    //Gson converter
+    api "com.squareup.retrofit2:converter-gson:2.1.0"
+    //gson
+    api 'com.google.code.gson:gson:2.8.2'
+    //XML解析
+    api('com.squareup.retrofit2:converter-simplexml:2.2.0') {
+        exclude group: 'xpp3', module: 'xpp3'
+        exclude group: 'stax', module: 'stax-api'
+        exclude group: 'stax', module: 'stax'
+    }
+//    //Log拦截器
+    api 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+//    //设置cookie
+//    api 'com.squareup.okhttp3:okhttp-urlconnection:3.2.0'
+    // 网络操作--有网络操作添加
+    api 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    // 该okhttp
+    api 'com.squareup.okhttp3:okhttp:3.14.1'
+
+}
